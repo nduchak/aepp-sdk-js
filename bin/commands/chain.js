@@ -85,7 +85,6 @@ async function play ({host, limit}) {
     await handleApiError(async () => {
       const top = await client.api.getTop()
       printBlock(top)
-      print('>>>>>>>>>')
       await playWithLimit(--limit, top.prevHash, client)
     })
   } catch (e) {
@@ -98,8 +97,8 @@ export async function playWithLimit (limit, blockHash, client) {
 
   let block = await client.api.getBlockByHash(blockHash)
   setTimeout(async () => {
-    printBlock(block)
     print('>>>>>>>>>')
+    printBlock(block)
     await playWithLimit(--limit, block.prevHash, client)
   }, 1000)
 }
